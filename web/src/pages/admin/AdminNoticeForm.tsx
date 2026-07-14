@@ -38,10 +38,14 @@ export default function AdminNoticeForm() {
     }
   }
 
-  return (
-    <div>
-      <h1>{editing ? 'Edit notice' : 'Create notice'}</h1>
-      <form className="form-grid" onSubmit={handleSubmit}>
+  if (editing && !notice) {
+  return <p>Loading notice…</p>;
+}
+
+return (
+  <div>
+    <h1>{editing ? 'Edit notice' : 'Create notice'}</h1>
+    <form key={notice?.id ?? 'new'} className="form-grid" onSubmit={handleSubmit}>
         <label>
           Title
           <input className="text-input" name="title" defaultValue={notice?.title ?? ''} required />
